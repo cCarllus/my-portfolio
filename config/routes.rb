@@ -20,6 +20,11 @@ Rails.application.routes.draw do
     resource :profile, only: %i[edit update]
     resource :email_template, only: %i[edit update]
     resource :map, only: %i[edit update]
+    resource :database, only: :show do
+      get :export_sql
+      get :export_sqlite
+      post :import
+    end
     resources :skills do
       patch :reorder, on: :collection
     end

@@ -1,0 +1,53 @@
+<header class="admin-page-header">
+  <div>
+    <h1><%= t("admin.database.title") %></h1>
+    <p><%= t("admin.database.description") %></p>
+  </div>
+</header>
+
+<section class="admin-backup-grid" aria-label="<%= t("admin.database.exports") %>">
+  <article class="admin-card admin-backup-card admin-backup-card--recommended">
+    <span class="admin-backup-card__badge"><%= t("admin.database.recommended") %></span>
+    <h2><%= t("admin.database.sql.title") %></h2>
+    <p><%= t("admin.database.sql.description") %></p>
+    <%= link_to t("admin.database.sql.action"), export_sql_admin_database_path, class: "admin-button" %>
+  </article>
+
+  <article class="admin-card admin-backup-card">
+    <span class="admin-backup-card__format">SQLite</span>
+    <h2><%= t("admin.database.sqlite.title") %></h2>
+    <p><%= t("admin.database.sqlite.description") %></p>
+    <%= link_to t("admin.database.sqlite.action"), export_sqlite_admin_database_path, class: "admin-button admin-button--secondary" %>
+  </article>
+</section>
+
+<section class="admin-form admin-backup-import">
+  <div class="admin-backup-import__heading">
+    <div>
+      <h2><%= t("admin.database.import.title") %></h2>
+      <p><%= t("admin.database.import.description") %></p>
+    </div>
+    <span>.sql / .sqlite3</span>
+  </div>
+
+  <%= form_with url: import_admin_database_path, method: :post, multipart: true do |form| %>
+    <label class="admin-field">
+      <span><%= t("admin.database.import.file") %></span>
+      <%= form.file_field :backup, accept: ".sql,.sqlite3", required: true %>
+    </label>
+
+    <label class="admin-check admin-backup-import__confirm">
+      <%= check_box_tag :confirm_replace, "1", false, required: true %>
+      <span><%= t("admin.database.import.confirm") %></span>
+    </label>
+
+    <div class="admin-form__actions">
+      <%= form.submit t("admin.database.import.action") %>
+    </div>
+  <% end %>
+</section>
+
+<aside class="admin-backup-note">
+  <strong><%= t("admin.database.contents.title") %></strong>
+  <p><%= t("admin.database.contents.description") %></p>
+</aside>

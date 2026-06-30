@@ -36,6 +36,7 @@ pt:
       documents: "Arquivos"
       email: "E-mail e currículo"
       map: "Localização"
+      database: "Database"
       requests: "Envios"
       view_site: "Visualizar site"
       sign_out: "Sair"
@@ -80,6 +81,31 @@ pt:
       title: "Localização"
       description: "Ajuste a legenda e a posição visual do ponto no mapa."
       preview: "Pré-visualização"
+    database:
+      title: "Database"
+      description: "Exporte ou restaure todos os dados e arquivos do portfólio em um pacote portátil."
+      exports: "Formatos de exportação"
+      recommended: "Recomendado"
+      confirm_required: "Confirme que deseja substituir os dados atuais."
+      imported: "Backup importado. Todo o conteúdo do portfólio foi restaurado."
+      invalid: "O arquivo não é um backup válido deste portfólio."
+      sql:
+        title: "Backup SQL portátil"
+        description: "Arquivo legível e versionável com perfil, skills, experiências, destaques, formação, documentos, foto, currículo e anexos."
+        action: "Exportar .sql"
+      sqlite:
+        title: "Snapshot SQLite"
+        description: "Contêiner binário compacto com o mesmo conteúdo completo. Ideal para backups rápidos e restauração direta."
+        action: "Exportar .sqlite3"
+      import:
+        title: "Importar backup"
+        description: "Aceita apenas backups gerados por esta aplicação. A restauração é validada antes de substituir os dados."
+        file: "Arquivo de backup"
+        confirm: "Entendo que o perfil e todo o conteúdo atual serão substituídos pelos dados do backup."
+        action: "Importar e restaurar"
+      contents:
+        title: "O que entra no backup?"
+        description: "Perfil, textos PT/EN, localização, e-mail, skills, experiências, destaques, formação, arquivos públicos e seus anexos. O histórico de envios e as credenciais do .env não são incluídos."
     skills:
       title: "Skills"
       description: "Tecnologias exibidas no card e no código Ruby. Cores e posições são automáticas."

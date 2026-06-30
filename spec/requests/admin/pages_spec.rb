@@ -19,6 +19,7 @@ RSpec.describe "Admin pages", type: :request do
       admin_portfolio_documents_path,
       edit_admin_email_template_path,
       edit_admin_map_path,
+      admin_database_path,
       admin_contact_requests_path
     ]
 
