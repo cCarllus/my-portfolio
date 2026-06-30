@@ -5,6 +5,8 @@ require "rspec/rails"
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
+Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |file| require file }
+
 RSpec.configure do |config|
   config.fixture_paths = [ Rails.root.join("spec/fixtures") ]
   config.use_transactional_fixtures = true

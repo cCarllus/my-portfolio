@@ -1,0 +1,50 @@
+<div class="admin-form__section localized-editor"
+     data-controller="localized-field"
+     data-localized-field-locale-value="pt"
+     data-localized-field-markdown-value="<%= local_assigns.fetch(:textarea, false) %>">
+  <div class="localized-editor__header">
+    <h2><%= title %></h2>
+    <div class="localized-editor__languages" role="group" aria-label="<%= t("admin.editor.language") %>">
+      <% I18n.available_locales.each do |locale| %>
+        <button type="button"
+                class="<%= "is-active" if locale == :pt %>"
+                data-localized-field-target="localeButton"
+                data-locale="<%= locale %>"
+                data-action="localized-field#changeLocale">
+          <%= t("admin.languages.#{locale}") %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+
+  <% I18n.available_locales.each do |locale| %>
+    <%= hidden_field_tag "#{form.object_name}[#{attribute}][#{locale}]",
+      translated_value(form.object, attribute, locale),
+      data: { localized_field_target: "stored", locale: } %>
+  <% end %>
+
+  <% if local_assigns.fetch(:textarea, false) %>
+    <div class="markdown-editor">
+      <div class="markdown-editor__toolbar" role="toolbar" aria-label="<%= t("admin.editor.toolbar") %>">
+        <button type="button" data-action="localized-field#format" data-format="bold" aria-label="<%= t("admin.editor.bold") %>"><strong>B</strong></button>
+        <button type="button" data-action="localized-field#format" data-format="italic" aria-label="<%= t("admin.editor.italic") %>"><em>I</em></button>
+        <button type="button" data-action="localized-field#format" data-format="heading" aria-label="<%= t("admin.editor.heading") %>">H2</button>
+        <button type="button" data-action="localized-field#format" data-format="list" aria-label="<%= t("admin.editor.list") %>">• list</button>
+        <button type="button" data-action="localized-field#togglePreview"><%= t("admin.editor.preview") %></button>
+      </div>
+      <textarea rows="<%= local_assigns.fetch(:rows, 8) %>"
+                aria-label="<%= title %>"
+                data-localized-field-target="editor"
+                data-action="input->localized-field#sync"></textarea>
+      <div class="markdown-editor__preview prose-panel" data-localized-field-target="preview" hidden></div>
+    </div>
+  <% else %>
+    <label class="admin-field">
+      <span class="sr-only"><%= title %></span>
+      <input type="text"
+             aria-label="<%= title %>"
+             data-localized-field-target="editor"
+             data-action="input->localized-field#sync">
+    </label>
+  <% end %>
+</div>

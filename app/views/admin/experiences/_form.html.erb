@@ -1,0 +1,13 @@
+<%= form_with model: [ :admin, record ], class: "admin-form" do |form| %>
+  <%= render "admin/shared/errors", record: %>
+  <div class="admin-form__grid">
+    <% %i[company period].each do |attribute| %>
+      <label class="admin-field"><span><%= t("admin.fields.#{attribute}") %></span><%= form.text_field attribute %></label>
+    <% end %>
+    <label class="admin-check"><%= form.check_box :published %><%= t("admin.fields.published") %></label>
+  </div>
+  <%= render "admin/shared/translated_fields", form:, attribute: :roles, title: t("admin.fields.roles") %>
+  <%= render "admin/shared/translated_fields", form:, attribute: :locations, title: t("admin.fields.locations") %>
+  <%= render "admin/shared/translated_fields", form:, attribute: :summaries, title: t("admin.fields.summaries"), textarea: true %>
+  <div class="admin-form__actions"><%= form.submit t("admin.actions.save") %><%= link_to t("admin.actions.cancel"), admin_experiences_path, class: "admin-button admin-button--secondary" %></div>
+<% end %>

@@ -11,4 +11,30 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+  resource :portfolio_request, only: :create
+
+  namespace :admin do
+    resource :session, only: %i[new create destroy]
+    root "dashboard#index"
+
+    resource :profile, only: %i[edit update]
+    resource :email_template, only: %i[edit update]
+    resource :map, only: %i[edit update]
+    resources :skills do
+      patch :reorder, on: :collection
+    end
+    resources :experiences do
+      patch :reorder, on: :collection
+    end
+    resources :highlights do
+      patch :reorder, on: :collection
+    end
+    resources :educations do
+      patch :reorder, on: :collection
+    end
+    resources :portfolio_documents do
+      patch :reorder, on: :collection
+    end
+    resources :contact_requests, only: %i[index show]
+  end
 end

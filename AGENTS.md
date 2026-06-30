@@ -210,7 +210,6 @@ Rules:
 - Support:
   - Portuguese (pt)
   - English (en)
-  - Spanish (es)
 
 Applies to:
 

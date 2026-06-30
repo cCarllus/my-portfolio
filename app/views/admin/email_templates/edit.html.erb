@@ -1,0 +1,22 @@
+<header class="admin-page-header">
+  <div>
+    <h1><%= t("admin.email_template.title") %></h1>
+    <p><%= t("admin.email_template.description") %></p>
+  </div>
+</header>
+
+<%= form_with model: @profile, url: admin_email_template_path, class: "admin-form" do |form| %>
+  <%= render "admin/shared/errors", record: @profile %>
+  <label class="admin-field">
+    <span><%= t("admin.fields.resume") %></span>
+    <%= form.file_field :resume, accept: "application/pdf" %>
+  </label>
+  <% if @profile.resume.attached? %>
+    <p class="admin-card__meta"><%= @profile.resume.filename %></p>
+  <% end %>
+
+  <%= render "admin/shared/translated_fields", form:, attribute: :email_subjects, title: t("admin.fields.email_subjects") %>
+  <%= render "admin/shared/translated_fields", form:, attribute: :email_bodies, title: t("admin.fields.email_bodies"), textarea: true, rows: 16 %>
+
+  <div class="admin-form__actions"><%= form.submit t("admin.actions.save") %></div>
+<% end %>

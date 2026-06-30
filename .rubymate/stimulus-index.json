@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "indexedAt": 1782831150329,
+  "indexedAt": 1782840227734,
   "controllers": {
     "hello": {
       "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/hello_controller.js",
@@ -31,24 +31,7 @@
         }
       ],
       "classes": [],
-      "mtime": 1782829176329.637
-    },
-    "portfolio-access": {
-      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/portfolio_access_controller.js",
-      "targets": [
-        "input",
-        "feedback"
-      ],
-      "values": [],
-      "outlets": [],
-      "actions": [
-        {
-          "name": "submit",
-          "line": 6
-        }
-      ],
-      "classes": [],
-      "mtime": 1782829176329.9006
+      "mtime": 1782837125713.271
     },
     "tabs": {
       "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/tabs_controller.js",
@@ -96,6 +79,7 @@
     "document-modal": {
       "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/document_modal_controller.js",
       "targets": [
+        "body",
         "dialog",
         "panel",
         "title"
@@ -109,19 +93,19 @@
         },
         {
           "name": "close",
-          "line": 16
+          "line": 17
         },
         {
           "name": "closeFromBackdrop",
-          "line": 20
+          "line": 21
         },
         {
           "name": "closed",
-          "line": 24
+          "line": 25
         }
       ],
       "classes": [],
-      "mtime": 1782831149883.5535
+      "mtime": 1782840227322.2786
     },
     "locale": {
       "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/locale_controller.js",
@@ -136,6 +120,140 @@
       ],
       "classes": [],
       "mtime": 1782831149883.2302
+    },
+    "dialog": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/dialog_controller.js",
+      "targets": [
+        "dialog"
+      ],
+      "values": [],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "open",
+          "line": 6
+        },
+        {
+          "name": "close",
+          "line": 11
+        },
+        {
+          "name": "closeFromBackdrop",
+          "line": 15
+        },
+        {
+          "name": "closed",
+          "line": 19
+        }
+      ],
+      "classes": [],
+      "mtime": 1782836864051.3918
+    },
+    "localized-field": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/localized_field_controller.js",
+      "targets": [
+        "editor",
+        "stored",
+        "localeButton",
+        "preview"
+      ],
+      "values": [
+        {
+          "name": "locale",
+          "type": "String"
+        },
+        {
+          "name": "markdown",
+          "type": "Boolean"
+        }
+      ],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "changeLocale",
+          "line": 11
+        },
+        {
+          "name": "sync",
+          "line": 17
+        },
+        {
+          "name": "format",
+          "line": 22
+        },
+        {
+          "name": "togglePreview",
+          "line": 39
+        },
+        {
+          "name": "loadLocale",
+          "line": 47
+        },
+        {
+          "name": "renderPreview",
+          "line": 55
+        },
+        {
+          "name": "escapeHtml",
+          "line": 79
+        }
+      ],
+      "classes": [],
+      "mtime": 1782836864050.5415
+    },
+    "sortable": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/sortable_controller.js",
+      "targets": [
+        "item",
+        "status"
+      ],
+      "values": [
+        {
+          "name": "url",
+          "type": "String"
+        },
+        {
+          "name": "error",
+          "type": "String"
+        }
+      ],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "start",
+          "line": 7
+        },
+        {
+          "name": "if",
+          "line": 12
+        },
+        {
+          "name": "move",
+          "line": 18
+        },
+        {
+          "name": "finish",
+          "line": 29
+        },
+        {
+          "name": "if",
+          "line": 33
+        },
+        {
+          "name": "cancel",
+          "line": 41
+        },
+        {
+          "name": "persist",
+          "line": 46
+        },
+        {
+          "name": "if",
+          "line": 56
+        }
+      ],
+      "classes": [],
+      "mtime": 1782838817765.9592
     }
   }
 }

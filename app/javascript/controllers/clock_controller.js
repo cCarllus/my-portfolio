@@ -15,7 +15,7 @@ export default class extends Controller {
 
   render() {
     const now = new Date()
-    const locale = { pt: "pt-BR", en: "en-US", es: "es-ES" }[this.localeValue] || "pt-BR"
+    const locale = { pt: "pt-BR", en: "en-US" }[this.localeValue] || "pt-BR"
 
     this.timeTarget.textContent = new Intl.DateTimeFormat(locale, {
       hour: "2-digit",

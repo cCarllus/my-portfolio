@@ -1,0 +1,13 @@
+<%= form_with model: [ :admin, record ], class: "admin-form" do |form| %>
+  <%= render "admin/shared/errors", record: %>
+  <div class="admin-form__grid">
+    <label class="admin-field"><span><%= t("admin.fields.file") %></span><%= form.file_field :file %></label>
+    <label class="admin-check"><%= form.check_box :published %><%= t("admin.fields.published") %></label>
+    <label class="admin-check"><%= form.check_box :uses_resume %><%= t("admin.fields.uses_resume") %></label>
+  </div>
+  <%= render "admin/shared/translated_fields", form:, attribute: :titles, title: t("admin.fields.titles") %>
+  <% unless record.derived? || record.content_kind == "resume" %>
+    <%= render "admin/shared/translated_fields", form:, attribute: :bodies, title: t("admin.fields.bodies"), textarea: true %>
+  <% end %>
+  <div class="admin-form__actions"><%= form.submit t("admin.actions.save") %><%= link_to t("admin.actions.cancel"), admin_portfolio_documents_path, class: "admin-button admin-button--secondary" %></div>
+<% end %>

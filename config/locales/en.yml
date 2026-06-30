@@ -8,13 +8,13 @@ en:
       navigation:
         label: "Primary navigation"
         greeting: "Hello, I'm Carlos Henrique Caldeira (Rick)"
+        greeting_dynamic: "Hello, I'm %{name} (%{nickname})"
         avatar_alt: "Photo of Carlos Henrique Caldeira"
         local_time: "Local date and time"
         language_label: "Select language"
         languages:
           pt: "PT"
           en: "EN"
-          es: "ES"
         change_theme: "Change color theme"
         dark: "Dark"
         light: "Light"
@@ -30,6 +30,10 @@ en:
         label: "Technical skills"
         clean_architecture: "Clean Architecture"
         ai: "LLMs & AI"
+        show_all: "View all (%{count})"
+        eyebrow: "Technical stack"
+        all_title: "All skills"
+        close: "Close skills"
       experience:
         label: "Career highlights"
         tabs:
@@ -75,8 +79,18 @@ en:
         description: "Part of my enterprise and architectural work is under NDA and cannot be shared publicly. Contact me to request access to private case studies."
         button: "View portfolio"
         feedback: "Private access will be connected when the protected case studies are published."
+        email_label: "Your email"
+        email_placeholder: "you@company.com"
+        email_description: "Receive my complete professional introduction and PDF resume directly by email."
+        email_button: "Receive introduction"
       documents:
         label: "Professional documents"
+        generated:
+          live_data: "Synchronized content"
+          experience_intro: "A detailed view of my journey, responsibilities and the context of each role."
+          skills_intro: "%{count} skills organized by the areas where they create the most impact."
+          highlights_intro: "Objective results and technical decisions that produced measurable impact."
+          education_intro: "Academic background and continuous learning supporting my professional work."
         items:
           about: "About me"
           experience: "Experience"
@@ -140,3 +154,4 @@ en:
             href: "https://linkedin.com/in/carlos-henrique-caldeira"
           - name: "GitHub"
             href: "https://github.com/oCarllus"
+      empty: "The portfolio content has not been configured yet."

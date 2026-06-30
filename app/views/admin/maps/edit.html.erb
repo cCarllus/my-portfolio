@@ -1,0 +1,29 @@
+<header class="admin-page-header">
+  <div>
+    <h1><%= t("admin.map.title") %></h1>
+    <p><%= t("admin.map.description") %></p>
+  </div>
+</header>
+
+<%= form_with model: @profile, url: admin_map_path, class: "admin-form" do |form| %>
+  <%= render "admin/shared/errors", record: @profile %>
+  <div class="admin-form__grid">
+    <label class="admin-field">
+      <span><%= t("admin.fields.map_x_percent") %></span>
+      <%= form.number_field :map_x_percent, min: 0, max: 100, step: 0.1 %>
+    </label>
+    <label class="admin-field">
+      <span><%= t("admin.fields.map_y_percent") %></span>
+      <%= form.number_field :map_y_percent, min: 0, max: 100, step: 0.1 %>
+    </label>
+  </div>
+  <%= render "admin/shared/translated_fields", form:, attribute: :map_labels, title: t("admin.fields.map_labels") %>
+
+  <div class="admin-form__section">
+    <h2><%= t("admin.map.preview") %></h2>
+    <div class="admin-map-preview">
+      <span style="left: <%= @profile.map_x_percent %>%; top: <%= @profile.map_y_percent %>%;"></span>
+    </div>
+  </div>
+  <div class="admin-form__actions"><%= form.submit t("admin.actions.save") %></div>
+<% end %>

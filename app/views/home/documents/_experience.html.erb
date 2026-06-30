@@ -1,0 +1,29 @@
+<div class="experience-file">
+  <header class="file-showcase__intro">
+    <span><%= t("home.index.documents.generated.live_data") %></span>
+    <p><%= t("home.index.documents.generated.experience_intro") %></p>
+  </header>
+
+  <div class="experience-file__timeline">
+    <% portfolio.experiences.each_with_index do |experience, index| %>
+      <article>
+        <div class="experience-file__marker"><span><%= index + 1 %></span></div>
+        <div class="experience-file__content">
+          <header>
+            <div>
+              <h3><%= experience.company %></h3>
+              <p><%= experience.localized(:roles) %></p>
+            </div>
+            <time><%= experience.period %></time>
+          </header>
+          <% if experience.localized(:locations).present? %>
+            <span class="experience-file__location"><%= experience.localized(:locations) %></span>
+          <% end %>
+          <% if experience.localized(:summaries).present? %>
+            <div class="experience-file__summary"><%= render_markdown(experience.localized(:summaries)) %></div>
+          <% end %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</div>

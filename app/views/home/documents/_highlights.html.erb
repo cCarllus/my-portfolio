@@ -1,0 +1,17 @@
+<div class="highlights-file">
+  <header class="file-showcase__intro">
+    <span><%= t("home.index.documents.generated.live_data") %></span>
+    <p><%= t("home.index.documents.generated.highlights_intro") %></p>
+  </header>
+
+  <div class="highlights-file__grid">
+    <% portfolio.highlights.each_with_index do |highlight, index| %>
+      <article>
+        <span class="highlights-file__index"><%= format("%02d", index + 1) %></span>
+        <strong><%= highlight.metric %></strong>
+        <h3><%= highlight.localized(:titles) %></h3>
+        <div><%= render_markdown(highlight.localized(:descriptions)) %></div>
+      </article>
+    <% end %>
+  </div>
+</div>

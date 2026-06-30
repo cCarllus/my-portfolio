@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["dialog", "panel", "title"]
+  static targets = ["body", "dialog", "panel", "title"]
 
   open({ params: { panel, title } }) {
     this.panelTargets.forEach((candidate) => {
@@ -10,6 +10,7 @@ export default class extends Controller {
 
     this.titleTarget.textContent = title
     this.dialogTarget.showModal()
+    this.bodyTarget.scrollTop = 0
     document.body.classList.add("modal-open")
   }
 

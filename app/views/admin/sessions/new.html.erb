@@ -1,0 +1,20 @@
+<% content_for :title, t("admin.sessions.title") %>
+
+<section class="admin-login">
+  <h1><%= t("admin.sessions.title") %></h1>
+  <p><%= t("admin.sessions.description") %></p>
+
+  <%= form_with url: admin_session_path do |form| %>
+    <label class="admin-field">
+      <span><%= t("admin.fields.email") %></span>
+      <%= form.email_field :email, required: true, autocomplete: "username" %>
+    </label>
+    <label class="admin-field">
+      <span><%= t("admin.fields.password") %></span>
+      <%= form.password_field :password, required: true, autocomplete: "current-password" %>
+    </label>
+    <div class="admin-form__actions">
+      <%= form.submit t("admin.sessions.submit") %>
+    </div>
+  <% end %>
+</section>

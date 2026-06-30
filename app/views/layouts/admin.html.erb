@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+  <head>
+    <title><%= content_for(:title) || t("admin.meta.title") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="admin-body">
+    <% if AdminPolicy.new(session).authorized? %>
+      <div class="admin-shell">
+        <aside class="admin-sidebar">
+          <%= link_to admin_root_path, class: "admin-brand" do %>
+            <span>CC</span>
+            <strong><%= t("admin.brand") %></strong>
+          <% end %>
+
+          <nav aria-label="<%= t("admin.navigation.label") %>">
+            <%= link_to t("admin.navigation.dashboard"), admin_root_path %>
+            <%= link_to t("admin.navigation.profile"), edit_admin_profile_path %>
+            <%= link_to t("admin.navigation.skills"), admin_skills_path %>
+            <%= link_to t("admin.navigation.experiences"), admin_experiences_path %>
+            <%= link_to t("admin.navigation.highlights"), admin_highlights_path %>
+            <%= link_to t("admin.navigation.education"), admin_educations_path %>
+            <%= link_to t("admin.navigation.documents"), admin_portfolio_documents_path %>
+            <%= link_to t("admin.navigation.email"), edit_admin_email_template_path %>
+            <%= link_to t("admin.navigation.map"), edit_admin_map_path %>
+            <%= link_to t("admin.navigation.requests"), admin_contact_requests_path %>
+          </nav>
+
+          <div class="admin-sidebar__footer">
+            <%= link_to t("admin.navigation.view_site"), root_path, target: "_blank", rel: "noopener" %>
+            <%= button_to t("admin.navigation.sign_out"), admin_session_path, method: :delete %>
+          </div>
+        </aside>
+
+        <main class="admin-main">
+          <% flash.each do |type, message| %>
+            <div class="admin-flash admin-flash--<%= type %>"><%= message %></div>
+          <% end %>
+          <%= yield %>
+        </main>
+      </div>
+    <% else %>
+      <main class="admin-auth">
+        <% flash.each do |type, message| %>
+          <div class="admin-flash admin-flash--<%= type %>"><%= message %></div>
+        <% end %>
+        <%= yield %>
+      </main>
+    <% end %>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<header class="admin-page-header">
+  <div><h1><%= t("admin.highlights.title") %></h1><p><%= t("admin.highlights.description") %></p></div>
+  <%= link_to t("admin.actions.new"), new_admin_highlight_path, class: "admin-button" %>
+</header>
+<section data-controller="sortable" data-sortable-url-value="<%= reorder_admin_highlights_path %>" data-sortable-error-value="<%= t("admin.sortable.error") %>">
+<p class="admin-sort-help"><%= t("admin.sortable.help") %> <span data-sortable-target="status"></span></p>
+<div class="admin-list">
+  <% @records.each do |highlight| %>
+    <article class="admin-list__item" data-sortable-target="item" data-id="<%= highlight.id %>">
+      <button type="button" class="admin-drag-handle" aria-label="<%= t("admin.sortable.handle") %>" data-action="pointerdown->sortable#start pointermove->sortable#move pointerup->sortable#finish pointercancel->sortable#cancel mousedown->sortable#start mousemove@window->sortable#move mouseup@window->sortable#finish">⋮⋮</button>
+      <div><strong><%= highlight.localized(:titles) %></strong><span><%= highlight.metric %></span></div>
+      <div class="admin-list__actions">
+        <%= link_to t("admin.actions.edit"), edit_admin_highlight_path(highlight) %>
+        <%= button_to t("admin.actions.delete"), admin_highlight_path(highlight), method: :delete, data: { turbo_confirm: t("admin.actions.confirm") } %>
+      </div>
+    </article>
+  <% end %>
+</div>
+</section>

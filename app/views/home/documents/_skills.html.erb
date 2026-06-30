@@ -1,0 +1,25 @@
+<div class="skills-file">
+  <header class="file-showcase__intro">
+    <span><%= t("home.index.documents.generated.live_data") %></span>
+    <p><%= t("home.index.documents.generated.skills_intro", count: portfolio.skills.size) %></p>
+  </header>
+
+  <div class="skills-file__groups">
+    <% portfolio.skill_groups.each do |category, skills| %>
+      <section>
+        <header>
+          <span></span>
+          <h3><%= category %></h3>
+          <small><%= skills.size.to_s.rjust(2, "0") %></small>
+        </header>
+        <div>
+          <% skills.each do |skill| %>
+            <span class="skills-file__pill" style="--skill-color: <%= skill.color %>">
+              <i></i><%= skill.name %>
+            </span>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+  </div>
+</div>

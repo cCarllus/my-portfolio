@@ -8,13 +8,13 @@ pt:
       navigation:
         label: "Navegação principal"
         greeting: "Olá, eu sou Carlos Henrique Caldeira (Rick)"
+        greeting_dynamic: "Olá, eu sou %{name} (%{nickname})"
         avatar_alt: "Foto de Carlos Henrique Caldeira"
         local_time: "Data e hora local"
         language_label: "Selecionar idioma"
         languages:
           pt: "PT"
           en: "EN"
-          es: "ES"
         change_theme: "Alterar tema de cores"
         dark: "Escuro"
         light: "Claro"
@@ -30,6 +30,10 @@ pt:
         label: "Competências técnicas"
         clean_architecture: "Arquitetura Limpa"
         ai: "LLMs e IA"
+        show_all: "Ver todas (%{count})"
+        eyebrow: "Stack técnica"
+        all_title: "Todas as skills"
+        close: "Fechar skills"
       experience:
         label: "Destaques da carreira"
         tabs:
@@ -75,8 +79,18 @@ pt:
         description: "Parte do meu trabalho corporativo e de arquitetura está sob NDA e não pode ser compartilhada publicamente. Entre em contato para solicitar acesso aos estudos de caso privados."
         button: "Ver portfólio"
         feedback: "O acesso privado será conectado quando os estudos de caso protegidos forem publicados."
+        email_label: "Seu e-mail"
+        email_placeholder: "voce@empresa.com"
+        email_description: "Receba minha apresentação profissional completa e o currículo em PDF diretamente no seu e-mail."
+        email_button: "Receber apresentação"
       documents:
         label: "Documentos profissionais"
+        generated:
+          live_data: "Conteúdo sincronizado"
+          experience_intro: "Uma visão detalhada da minha trajetória, responsabilidades e contexto de cada atuação."
+          skills_intro: "%{count} competências organizadas pelas áreas em que geram mais impacto."
+          highlights_intro: "Resultados objetivos e decisões técnicas que produziram impacto mensurável."
+          education_intro: "Formação acadêmica e aprendizado contínuo que sustentam minha atuação profissional."
         items:
           about: "Sobre mim"
           experience: "Experiência"
@@ -140,3 +154,4 @@ pt:
             href: "https://linkedin.com/in/carlos-henrique-caldeira"
           - name: "GitHub"
             href: "https://github.com/oCarllus"
+      empty: "O conteúdo do portfólio ainda não foi configurado."

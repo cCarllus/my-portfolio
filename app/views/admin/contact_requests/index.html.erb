@@ -1,0 +1,25 @@
+<header class="admin-page-header">
+  <div><h1><%= t("admin.requests.title") %></h1><p><%= t("admin.requests.description") %></p></div>
+</header>
+<div class="admin-card">
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th><%= t("admin.fields.email") %></th>
+        <th><%= t("admin.fields.status") %></th>
+        <th><%= t("admin.fields.locale") %></th>
+        <th><%= t("admin.fields.created_at") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contact_requests.each do |request| %>
+        <tr>
+          <td><%= link_to request.email, admin_contact_request_path(request) %></td>
+          <td><%= request.status %></td>
+          <td><%= request.locale.upcase %></td>
+          <td><%= l(request.created_at, format: :short) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

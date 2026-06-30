@@ -1,0 +1,32 @@
+<header class="admin-page-header">
+  <div><h1><%= t("admin.documents.title") %></h1><p><%= t("admin.documents.description") %></p></div>
+  <%= link_to t("admin.actions.new"), new_admin_portfolio_document_path, class: "admin-button" %>
+</header>
+<section data-controller="sortable" data-sortable-url-value="<%= reorder_admin_portfolio_documents_path %>" data-sortable-error-value="<%= t("admin.sortable.error") %>">
+<p class="admin-sort-help"><%= t("admin.sortable.help") %> <span data-sortable-target="status"></span></p>
+<div class="admin-list">
+  <% @records.each do |document| %>
+    <article class="admin-list__item" data-sortable-target="item" data-id="<%= document.id %>">
+      <button type="button" class="admin-drag-handle" aria-label="<%= t("admin.sortable.handle") %>" data-action="pointerdown->sortable#start pointermove->sortable#move pointerup->sortable#finish pointercancel->sortable#cancel mousedown->sortable#start mousemove@window->sortable#move mouseup@window->sortable#finish">⋮⋮</button>
+      <div>
+        <strong><%= document.localized(:titles) %></strong>
+        <span>
+          <% if document.derived? %>
+            <%= t("admin.documents.synchronized") %>
+          <% else %>
+            <%= document.file.attached? ? document.file.filename : t("admin.documents.no_file") %>
+          <% end %>
+        </span>
+      </div>
+      <div class="admin-list__actions">
+        <% if document.system? && portfolio_document_management_path(document) %>
+          <%= link_to t("admin.documents.manage_source"), portfolio_document_management_path(document) %>
+        <% else %>
+          <%= link_to t("admin.actions.edit"), edit_admin_portfolio_document_path(document) %>
+          <%= button_to t("admin.actions.delete"), admin_portfolio_document_path(document), method: :delete, data: { turbo_confirm: t("admin.actions.confirm") } %>
+        <% end %>
+      </div>
+    </article>
+  <% end %>
+</div>
+</section>
