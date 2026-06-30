@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "indexedAt": 1782828749207,
+  "controllers": {
+    "hello": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/hello_controller.js",
+      "targets": [],
+      "values": [],
+      "outlets": [],
+      "actions": [],
+      "classes": [],
+      "mtime": 1782828737924.9265
+    }
+  }
+}
