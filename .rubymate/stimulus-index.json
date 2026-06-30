@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "indexedAt": 1782829176737,
+  "indexedAt": 1782831150329,
   "controllers": {
     "hello": {
       "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/hello_controller.js",
@@ -92,6 +92,50 @@
       ],
       "classes": [],
       "mtime": 1782829176329.5012
+    },
+    "document-modal": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/document_modal_controller.js",
+      "targets": [
+        "dialog",
+        "panel",
+        "title"
+      ],
+      "values": [],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "open",
+          "line": 6
+        },
+        {
+          "name": "close",
+          "line": 16
+        },
+        {
+          "name": "closeFromBackdrop",
+          "line": 20
+        },
+        {
+          "name": "closed",
+          "line": 24
+        }
+      ],
+      "classes": [],
+      "mtime": 1782831149883.5535
+    },
+    "locale": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/locale_controller.js",
+      "targets": [],
+      "values": [],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "change",
+          "line": 4
+        }
+      ],
+      "classes": [],
+      "mtime": 1782831149883.2302
     }
   }
 }
