@@ -1,0 +1,165 @@
+<% content_for :title, t("meta.title") %>
+<% content_for :description, t("meta.description") %>
+
+<main class="portfolio-shell">
+  <nav class="portfolio-nav panel" aria-label="<%= t(".navigation.label") %>">
+    <div class="identity">
+      <span class="identity__avatar" aria-hidden="true">R</span>
+      <span><%= t(".navigation.greeting") %> <span aria-hidden="true">👋</span></span>
+    </div>
+
+    <div class="nav-tools">
+      <div
+        class="local-time"
+        data-controller="clock"
+        data-clock-locale-value="<%= I18n.locale %>"
+        aria-label="<%= t(".navigation.local_time") %>"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        <time data-clock-target="time"></time>
+        <time data-clock-target="date"></time>
+      </div>
+
+      <button
+        class="theme-toggle"
+        type="button"
+        data-action="theme#toggle"
+        data-theme-target="button"
+        aria-label="<%= t(".navigation.change_theme") %>"
+        aria-pressed="true"
+      >
+        <span class="theme-toggle__track" aria-hidden="true"><span></span></span>
+        <span
+          data-theme-target="label"
+          data-dark-label="<%= t(".navigation.dark") %>"
+          data-light-label="<%= t(".navigation.light") %>"
+        ><%= t(".navigation.dark") %></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="portfolio-grid portfolio-grid--top" aria-label="<%= t(".profile.section_label") %>">
+    <article class="code-card panel" aria-label="<%= t(".profile.code_label") %>">
+      <div class="code-card__lines" aria-hidden="true">
+        <% (8..19).each do |line| %><span><%= line %></span><% end %>
+      </div>
+      <pre class="code-card__content"><code><span class="code-key">role</span><span class="code-punctuation">: {</span>
+  <span class="code-string">'<%= t(".profile.role") %>'</span><span class="code-punctuation">,</span>
+<span class="code-punctuation">},</span>
+<span class="code-key">stack</span><span class="code-punctuation">: {</span>
+  <span class="code-property">primary</span><span class="code-punctuation">: [</span><span class="code-value">'Ruby on Rails'</span><span class="code-punctuation">, </span><span class="code-value">'Node.js + TS'</span><span class="code-punctuation">],</span>
+  <span class="code-property">also</span><span class="code-punctuation">: [</span><span class="code-value">'Python'</span><span class="code-punctuation">, </span><span class="code-value">'AWS'</span><span class="code-punctuation">, </span><span class="code-value">'PostgreSQL'</span><span class="code-punctuation">],</span>
+<span class="code-punctuation">},</span>
+<span class="code-key">building</span><span class="code-punctuation">: [</span><span class="code-value">'Bayonne'</span><span class="code-punctuation">, </span><span class="code-value">'TARS'</span><span class="code-punctuation">, </span><span class="code-value">'Answer Buddy'</span><span class="code-punctuation">],</span>
+<span class="code-key">philosophy</span><span class="code-punctuation">: </span><span class="code-string">'<%= t(".profile.philosophy") %>'</span><span class="code-punctuation">,</span>
+
+<span class="code-comment">// <%= t(".profile.export") %></span>
+<span class="code-export">export default</span> <span class="code-name">profile</span><span class="code-cursor" aria-hidden="true">|</span></code></pre>
+    </article>
+
+    <article class="skills-card panel" aria-label="<%= t(".skills.label") %>">
+      <% ["Ruby on Rails", "Node.js + TypeScript", "Python", "AWS", "PostgreSQL", t(".skills.clean_architecture"), t(".skills.ai"), "TDD"].each_with_index do |skill, index| %>
+        <span class="skill-pill skill-pill--<%= index + 1 %>"><%= skill %></span>
+      <% end %>
+    </article>
+
+    <article class="experience-card panel" data-controller="tabs">
+      <div class="tabs" role="tablist" aria-label="<%= t(".experience.label") %>">
+        <% %i[work projects education].each_with_index do |tab, index| %>
+          <button
+            type="button"
+            role="tab"
+            id="<%= tab %>-tab"
+            aria-controls="<%= tab %>-panel"
+            aria-selected="<%= index.zero? %>"
+            tabindex="<%= index.zero? ? 0 : -1 %>"
+            class="tab <%= "tab--active" if index.zero? %>"
+            data-tabs-target="tab"
+            data-action="tabs#select"
+          ><%= t(".experience.tabs.#{tab}") %></button>
+        <% end %>
+      </div>
+
+      <% { work: t(".experience.work"), projects: t(".experience.projects"), education: t(".experience.education") }.each_with_index do |(name, items), index| %>
+        <div
+          class="timeline"
+          id="<%= name %>-panel"
+          role="tabpanel"
+          aria-labelledby="<%= name %>-tab"
+          data-tabs-target="panel"
+          <%= "hidden" unless index.zero? %>
+        >
+          <% items.each do |item| %>
+            <div class="timeline__item">
+              <div>
+                <strong><%= item[:name] %></strong>
+                <span><%= item[:role] %></span>
+              </div>
+              <time><%= item[:period] %></time>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </article>
+  </section>
+
+  <section class="portfolio-grid portfolio-grid--bottom" aria-label="<%= t(".details.section_label") %>">
+    <article class="map-card panel" aria-label="<%= t(".location.label") %>">
+      <div class="location-pin">
+        <span class="location-pin__pulse" aria-hidden="true"></span>
+        <span class="location-pin__dot" aria-hidden="true"></span>
+        <span class="location-pin__tooltip"><%= t(".location.city") %></span>
+      </div>
+    </article>
+
+    <article class="access-card panel">
+      <div class="access-card__tab" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      </div>
+      <div class="access-card__content">
+        <h2><%= t(".access.title") %></h2>
+        <form data-controller="portfolio-access" data-action="submit->portfolio-access#submit">
+          <label class="passcode-field">
+            <span class="sr-only"><%= t(".access.passcode_label") %></span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9m-4 4 3 3m-6 0 2 2"/></svg>
+            <input
+              type="password"
+              autocomplete="off"
+              placeholder="<%= t(".access.passcode_placeholder") %>"
+              data-portfolio-access-target="input"
+            >
+          </label>
+          <p><%= t(".access.description") %></p>
+          <button type="submit"><%= t(".access.button") %></button>
+          <p class="access-card__feedback" data-portfolio-access-target="feedback" hidden><%= t(".access.feedback") %></p>
+        </form>
+      </div>
+    </article>
+
+    <article class="documents-card panel" aria-label="<%= t(".documents.label") %>">
+      <div class="documents-grid">
+        <% t(".documents.items").each_with_index do |document, index| %>
+          <a class="document" href="<%= document[:href] %>">
+            <span class="document__icon">
+              <% if index == 4 %>
+                <span class="document__pdf">PDF</span>
+              <% else %>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 7h10M7 11h<%= index.even? ? 10 : 7 %>M7 15h<%= index == 2 ? 6 : 9 %>"/></svg>
+              <% end %>
+              <span class="document__fold" aria-hidden="true"></span>
+            </span>
+            <span><%= document[:name] %></span>
+          </a>
+        <% end %>
+      </div>
+    </article>
+  </section>
+
+  <footer class="portfolio-footer panel">
+    <nav aria-label="<%= t(".footer.label") %>">
+      <% t(".footer.links").each do |link| %>
+        <a href="<%= link[:href] %>"><%= link[:name] %></a>
+      <% end %>
+    </nav>
+  </footer>
+</main>

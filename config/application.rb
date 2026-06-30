@@ -38,5 +38,8 @@ module MyPortfolio
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.i18n.available_locales = %i[pt en es]
+    config.i18n.default_locale = :pt
   end
 end

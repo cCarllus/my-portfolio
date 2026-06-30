@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
-    <title><%= content_for(:title) || "My Portfolio" %></title>
+    <title><%= content_for(:title) || t("meta.title") %></title>
+    <meta name="description" content="<%= content_for(:description) || t("meta.description") %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="My Portfolio">
+    <meta name="application-name" content="<%= t("meta.application_name") %>">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -23,7 +24,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-controller="theme" data-theme-storage-key-value="portfolio-theme">
     <%= yield %>
   </body>
 </html>

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "indexedAt": 1782828749207,
+  "indexedAt": 1782829176737,
   "controllers": {
     "hello": {
       "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/hello_controller.js",
@@ -10,6 +10,88 @@
       "actions": [],
       "classes": [],
       "mtime": 1782828737924.9265
+    },
+    "clock": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/clock_controller.js",
+      "targets": [
+        "time",
+        "date"
+      ],
+      "values": [
+        {
+          "name": "locale",
+          "type": "String"
+        }
+      ],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "render",
+          "line": 16
+        }
+      ],
+      "classes": [],
+      "mtime": 1782829176329.637
+    },
+    "portfolio-access": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/portfolio_access_controller.js",
+      "targets": [
+        "input",
+        "feedback"
+      ],
+      "values": [],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "submit",
+          "line": 6
+        }
+      ],
+      "classes": [],
+      "mtime": 1782829176329.9006
+    },
+    "tabs": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/tabs_controller.js",
+      "targets": [
+        "tab",
+        "panel"
+      ],
+      "values": [],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "select",
+          "line": 6
+        }
+      ],
+      "classes": [],
+      "mtime": 1782829176329.7568
+    },
+    "theme": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/theme_controller.js",
+      "targets": [
+        "button",
+        "label"
+      ],
+      "values": [
+        {
+          "name": "storageKey",
+          "type": "String"
+        }
+      ],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "toggle",
+          "line": 12
+        },
+        {
+          "name": "apply",
+          "line": 16
+        }
+      ],
+      "classes": [],
+      "mtime": 1782829176329.5012
     }
   }
 }

@@ -1,31 +1,90 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  meta:
+    title: "Rick — Portfolio"
+    description: "Senior full stack software engineer focused on Rails, distributed systems and products with real impact."
+    application_name: "Rick's portfolio"
+  home:
+    index:
+      navigation:
+        label: "Primary navigation"
+        greeting: "Hello, it's Rick"
+        local_time: "Local date and time"
+        change_theme: "Change color theme"
+        dark: "Dark"
+        light: "Light"
+      profile:
+        section_label: "Professional profile"
+        code_label: "Profile as source code"
+        role: "Senior Full Stack Software Engineer"
+        philosophy: "Clean Architecture • Real impact"
+        export: "Export"
+      skills:
+        label: "Technical skills"
+        clean_architecture: "Clean Architecture"
+        ai: "LLMs & AI"
+      experience:
+        label: "Career highlights"
+        tabs:
+          work: "Work experience"
+          projects: "Projects"
+          education: "Education"
+        work:
+          - name: "Lemon & Kiwi"
+            role: "Senior Full Stack Engineer"
+            period: "Sep 2025 — Now"
+          - name: "MetaOriginal"
+            role: "Software Engineer"
+            period: "Nov 2021 — Oct 2025"
+          - name: "Monde Sistemas"
+            role: "Backend Developer"
+            period: "Oct 2019 — Nov 2021"
+        projects:
+          - name: "Bayonne"
+            role: "Product engineering"
+            period: "Current"
+          - name: "TARS"
+            role: "Automation platform"
+            period: "Current"
+          - name: "Answer Buddy"
+            role: "Artificial intelligence"
+            period: "Current"
+        education:
+          - name: "Continuous learning"
+            role: "Software architecture and distributed systems"
+            period: "Ongoing"
+      details:
+        section_label: "Location, portfolio access and documents"
+      location:
+        label: "Current location"
+        city: "São Bernardo do Campo, SP"
+      access:
+        title: "My portfolio"
+        passcode_label: "Portfolio passcode"
+        passcode_placeholder: "Enter passcode"
+        description: "Much of my enterprise and architectural work is under NDA and cannot be shared publicly. Email me and I'll send you access accordingly."
+        button: "View portfolio"
+        feedback: "Private access will be connected when the protected case studies are published."
+      documents:
+        label: "Documents and reading"
+        items:
+          - name: "More about me"
+            href: "#"
+          - name: "Denver, Boulder, Estes Park_2026"
+            href: "#"
+          - name: "El Paso, Van Horn, Marfa, Big Bend"
+            href: "#"
+          - name: "Arcadia, Maine_2026"
+            href: "#"
+          - name: "Resume"
+            href: "#"
+      footer:
+        label: "Social links"
+        links:
+          - name: "Email"
+            href: "mailto:"
+          - name: "LinkedIn"
+            href: "#"
+          - name: "GitHub"
+            href: "#"
+          - name: "Medium"
+            href: "#"

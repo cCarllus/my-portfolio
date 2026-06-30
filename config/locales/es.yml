@@ -1,0 +1,90 @@
+es:
+  meta:
+    title: "Rick — Portafolio"
+    description: "Ingeniero de software full stack sénior enfocado en Rails, sistemas distribuidos y productos con impacto real."
+    application_name: "Portafolio de Rick"
+  home:
+    index:
+      navigation:
+        label: "Navegación principal"
+        greeting: "Hola, soy Rick"
+        local_time: "Fecha y hora local"
+        change_theme: "Cambiar tema de colores"
+        dark: "Oscuro"
+        light: "Claro"
+      profile:
+        section_label: "Perfil profesional"
+        code_label: "Perfil como código fuente"
+        role: "Ingeniero de Software Full Stack Sénior"
+        philosophy: "Arquitectura limpia • Impacto real"
+        export: "Exportar"
+      skills:
+        label: "Habilidades técnicas"
+        clean_architecture: "Arquitectura Limpia"
+        ai: "LLMs e IA"
+      experience:
+        label: "Aspectos destacados de la carrera"
+        tabs:
+          work: "Experiencia"
+          projects: "Proyectos"
+          education: "Formación"
+        work:
+          - name: "Lemon & Kiwi"
+            role: "Ingeniero Full Stack Sénior"
+            period: "Sep 2025 — Hoy"
+          - name: "MetaOriginal"
+            role: "Ingeniero de Software"
+            period: "Nov 2021 — Oct 2025"
+          - name: "Monde Sistemas"
+            role: "Desarrollador Backend"
+            period: "Oct 2019 — Nov 2021"
+        projects:
+          - name: "Bayonne"
+            role: "Ingeniería de producto"
+            period: "Actual"
+          - name: "TARS"
+            role: "Plataforma de automatización"
+            period: "Actual"
+          - name: "Answer Buddy"
+            role: "Inteligencia artificial"
+            period: "Actual"
+        education:
+          - name: "Aprendizaje continuo"
+            role: "Arquitectura de software y sistemas distribuidos"
+            period: "En curso"
+      details:
+        section_label: "Ubicación, acceso al portafolio y documentos"
+      location:
+        label: "Ubicación actual"
+        city: "São Bernardo do Campo, SP"
+      access:
+        title: "Mi portafolio"
+        passcode_label: "Código de acceso al portafolio"
+        passcode_placeholder: "Introduce el código de acceso"
+        description: "Gran parte de mi trabajo empresarial y de arquitectura está bajo NDA y no puede compartirse públicamente. Envíame un correo electrónico y te daré el acceso adecuado."
+        button: "Ver portafolio"
+        feedback: "El acceso privado se conectará cuando se publiquen los casos de estudio protegidos."
+      documents:
+        label: "Documentos y lecturas"
+        items:
+          - name: "Más sobre mí"
+            href: "#"
+          - name: "Denver, Boulder, Estes Park_2026"
+            href: "#"
+          - name: "El Paso, Van Horn, Marfa, Big Bend"
+            href: "#"
+          - name: "Arcadia, Maine_2026"
+            href: "#"
+          - name: "Currículum"
+            href: "#"
+      footer:
+        label: "Enlaces sociales"
+        links:
+          - name: "Correo"
+            href: "mailto:"
+          - name: "LinkedIn"
+            href: "#"
+          - name: "GitHub"
+            href: "#"
+          - name: "Medium"
+            href: "#"
