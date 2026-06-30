@@ -1,19 +1,62 @@
 <header class="admin-page-header">
-  <div><h1><%= t("admin.highlights.title") %></h1><p><%= t("admin.highlights.description") %></p></div>
-  <%= link_to t("admin.actions.new"), new_admin_highlight_path, class: "admin-button" %>
+  <div>
+    <h1><%= t("admin.highlights.title") %></h1>
+    <p><%= t("admin.highlights.description") %></p>
+  </div>
+  <%= link_to t("admin.highlights.new"), new_admin_highlight_path, class: "admin-button" %>
 </header>
-<section data-controller="sortable" data-sortable-url-value="<%= reorder_admin_highlights_path %>" data-sortable-error-value="<%= t("admin.sortable.error") %>">
-<p class="admin-sort-help"><%= t("admin.sortable.help") %> <span data-sortable-target="status"></span></p>
-<div class="admin-list">
-  <% @records.each do |highlight| %>
-    <article class="admin-list__item" data-sortable-target="item" data-id="<%= highlight.id %>">
-      <button type="button" class="admin-drag-handle" aria-label="<%= t("admin.sortable.handle") %>" data-action="pointerdown->sortable#start pointermove->sortable#move pointerup->sortable#finish pointercancel->sortable#cancel mousedown->sortable#start mousemove@window->sortable#move mouseup@window->sortable#finish">⋮⋮</button>
-      <div><strong><%= highlight.localized(:titles) %></strong><span><%= highlight.metric %></span></div>
-      <div class="admin-list__actions">
-        <%= link_to t("admin.actions.edit"), edit_admin_highlight_path(highlight) %>
-        <%= button_to t("admin.actions.delete"), admin_highlight_path(highlight), method: :delete, data: { turbo_confirm: t("admin.actions.confirm") } %>
-      </div>
-    </article>
+
+<section class="github-sync admin-card">
+  <div class="github-sync__intro">
+    <span class="github-sync__icon" aria-hidden="true">GH</span>
+    <div>
+      <h2><%= t("admin.highlights.github.title") %></h2>
+      <p><%= t("admin.highlights.github.description") %></p>
+    </div>
+  </div>
+  <%= form_with url: sync_github_admin_highlights_path, method: :post, class: "github-sync__form" do |form| %>
+    <label class="admin-field">
+      <span><%= t("admin.highlights.github.profile_url") %></span>
+      <%= form.url_field :github_url,
+        value: portfolio_profile.github_url,
+        placeholder: "https://github.com/username",
+        required: true,
+        autocomplete: "url" %>
+    </label>
+    <%= form.submit t("admin.highlights.github.action"), class: "admin-button" %>
   <% end %>
-</div>
+  <% if @records.where(source: "github").maximum(:github_synced_at) %>
+    <p class="github-sync__status">
+      <span></span>
+      <%= t("admin.highlights.github.last_sync", date: l(@records.where(source: "github").maximum(:github_synced_at), format: :short)) %>
+    </p>
+  <% end %>
+</section>
+
+<section data-controller="sortable" data-sortable-url-value="<%= reorder_admin_highlights_path %>" data-sortable-error-value="<%= t("admin.sortable.error") %>">
+  <p class="admin-sort-help"><%= t("admin.sortable.help") %> <span data-sortable-target="status"></span></p>
+  <div class="admin-list project-admin-list">
+    <% @records.each do |project| %>
+      <article class="admin-list__item project-admin-row" data-sortable-target="item" data-id="<%= project.id %>">
+        <button type="button" class="admin-drag-handle" aria-label="<%= t("admin.sortable.handle") %>" data-action="pointerdown->sortable#start pointermove->sortable#move pointerup->sortable#finish pointercancel->sortable#cancel mousedown->sortable#start mousemove@window->sortable#move mouseup@window->sortable#finish">⋮⋮</button>
+        <span class="project-admin-row__color" style="--project-color: <%= project.category_color %>"></span>
+        <div>
+          <strong><%= project.localized(:titles) %></strong>
+          <span>
+            <%= t("admin.highlights.categories.#{project.category}") %>
+            · <%= t("admin.highlights.sources.#{project.source}") %>
+            <% if project.primary_language.present? %> · <%= project.primary_language %><% end %>
+          </span>
+        </div>
+        <% if project.external_url.present? %>
+          <%= link_to t("admin.highlights.open_link"), project.external_url, class: "project-admin-row__link", target: "_blank", rel: "noopener" %>
+        <% end %>
+        <span class="project-admin-row__status"><%= project.published? ? t("admin.highlights.published") : t("admin.highlights.hidden") %></span>
+        <div class="admin-list__actions">
+          <%= link_to t("admin.actions.edit"), edit_admin_highlight_path(project) %>
+          <%= button_to t("admin.actions.delete"), admin_highlight_path(project), method: :delete, data: { turbo_confirm: t("admin.actions.confirm") } %>
+        </div>
+      </article>
+    <% end %>
+  </div>
 </section>

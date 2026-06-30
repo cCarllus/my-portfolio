@@ -23,8 +23,15 @@ export default class extends Controller {
     const formats = {
       bold: ["**", "**"],
       italic: ["*", "*"],
-      heading: ["## ", ""],
-      list: ["- ", ""]
+      heading1: ["# ", ""],
+      heading2: ["## ", ""],
+      heading3: ["### ", ""],
+      list: ["- ", ""],
+      orderedList: ["1. ", ""],
+      link: ["[", "](https://)"],
+      code: ["```\n", "\n```"],
+      quote: ["> ", ""],
+      strikethrough: ["~~", "~~"]
     }
     const [before, after] = formats[event.currentTarget.dataset.format]
     const start = this.editorTarget.selectionStart
@@ -55,14 +62,21 @@ export default class extends Controller {
   renderPreview() {
     const escaped = this.escapeHtml(this.editorTarget.value)
       .replace(/`([^`]+)`/g, "<code>$1</code>")
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
       .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
       .replace(/\*([^*]+)\*/g, "<em>$1</em>")
+      .replace(/~~([^~]+)~~/g, "<del>$1</del>")
 
     const blocks = escaped.split(/\n{2,}/).map((block) => {
       const lines = block.split("\n")
       if (lines.every((line) => /^[-*]\s+/.test(line))) {
         return `<ul>${lines.map((line) => `<li>${line.replace(/^[-*]\s+/, "")}</li>`).join("")}</ul>`
       }
+      if (lines.every((line) => /^\d+\.\s+/.test(line))) {
+        return `<ol>${lines.map((line) => `<li>${line.replace(/^\d+\.\s+/, "")}</li>`).join("")}</ol>`
+      }
+      if (/^```/.test(block)) return `<pre><code>${block.replace(/^```[^\n]*\n?/, "").replace(/\n?```$/, "")}</code></pre>`
+      if (/^>\s?/.test(block)) return `<blockquote>${block.replace(/^>\s?/, "")}</blockquote>`
       if (/^###\s+/.test(block)) return `<h3>${block.replace(/^###\s+/, "")}</h3>`
       if (/^##\s+/.test(block)) return `<h2>${block.replace(/^##\s+/, "")}</h2>`
       if (/^#\s+/.test(block)) return `<h1>${block.replace(/^#\s+/, "")}</h1>`

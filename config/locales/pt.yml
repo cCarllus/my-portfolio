@@ -38,7 +38,7 @@ pt:
         label: "Destaques da carreira"
         tabs:
           work: "Experiências"
-          projects: "Destaques"
+          projects: "Projetos / Destaques"
           education: "Formação"
         work:
           - name: "Monde Sistemas"
@@ -145,6 +145,19 @@ pt:
           open: "Abrir em nova aba"
           download: "Baixar PDF"
           iframe_title: "Currículo de Carlos Henrique Caldeira"
+      projects:
+        intro: "Projetos públicos, entregas relevantes e repositórios sincronizados em um só catálogo."
+        search: "Buscar por nome ou descrição"
+        filter_label: "Filtrar projetos por categoria"
+        all: "Todos"
+        count:
+          one: "1 projeto"
+          other: "%{count} projetos"
+        count_template: "%{count} projetos"
+        portfolio: "Portfólio"
+        view: "Ver projeto"
+        open: "Abrir %{name}"
+        empty: "Nenhum projeto corresponde à busca e aos filtros."
       footer:
         label: "Links profissionais"
         links:

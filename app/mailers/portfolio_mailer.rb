@@ -12,11 +12,6 @@ class PortfolioMailer < ApplicationMailer
   private
 
   def attach_resume
-    return unless @profile.resume.attached?
-
-    attachments[@profile.resume.filename.to_s] = {
-      mime_type: @profile.resume.content_type,
-      content: @profile.resume.download
-    }
+    Portfolio::AttachResumeToEmail.call(mailer: self, profile: @profile)
   end
 end

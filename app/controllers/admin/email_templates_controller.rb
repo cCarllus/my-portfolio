@@ -22,6 +22,7 @@ module Admin
     def email_params
       params.require(:portfolio_profile).permit(
         :resume,
+        :resume_url,
         email_subjects: I18n.available_locales,
         email_bodies: I18n.available_locales
       )

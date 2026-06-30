@@ -1,5 +1,10 @@
 class PortfolioPresenter
   SKILLS_PREVIEW_LIMIT = 8
+  DocumentResource = Data.define(:preview_url, :open_url, :download_url, :content_type, :attachment) do
+    def url_based?
+      attachment.nil?
+    end
+  end
 
   attr_reader :profile
 
@@ -74,16 +79,34 @@ class PortfolioPresenter
   def tab_items
     {
       work: experiences.map { |item| { name: item.company, role: item.localized(:roles, locale), period: item.period } },
-      projects: highlights.map { |item| { name: item.localized(:titles, locale), role: item.localized(:descriptions, locale), period: item.metric } },
+      projects: highlights.first(3).map do |item|
+        {
+          name: item.localized(:titles, locale),
+          role: plain_project_description(item),
+          period: item.metric.presence || item.primary_language
+        }
+      end,
       education: educations.map { |item| { name: item.localized(:courses, locale), role: item.localized(:institutions, locale), period: item.localized(:statuses, locale) } }
     }
   end
 
-  def document_attachment(document)
-    return profile.resume if document.uses_resume? && profile.resume.attached?
-    return document.file if document.file.attached?
+  def avatar_display_url
+    return profile.avatar_url if profile.avatar_url.present?
+    return nil unless profile.avatar.attached?
 
-    nil
+    profile.avatar
+  end
+
+  def avatar_available?
+    profile.avatar_url.present? || profile.avatar.attached?
+  end
+
+  def document_resource(document)
+    if document.uses_resume?
+      resume_resource || file_resource(document)
+    else
+      file_resource(document)
+    end
   end
 
   def social_links
@@ -97,4 +120,53 @@ class PortfolioPresenter
   private
 
   attr_reader :locale
+
+  def plain_project_description(item)
+    ActionView::Base.full_sanitizer.sanitize(
+      Portfolio::MarkdownRenderer.call(item.localized(:descriptions, locale))
+    ).squish
+  end
+
+  def resume_resource
+    if profile.resume_url.present?
+      remote_resource(profile.resume_url, kind: :pdf)
+    elsif profile.resume.attached?
+      attachment_resource(profile.resume)
+    end
+  end
+
+  def file_resource(document)
+    if document.file_url.present?
+      remote_resource(document.file_url, kind: file_kind(document.file_url))
+    elsif document.file.attached?
+      attachment_resource(document.file)
+    end
+  end
+
+  def remote_resource(url, kind:)
+    asset = Portfolio::RemoteAssetUrl.normalize(url, kind:)
+    return unless asset
+
+    DocumentResource.new(
+      preview_url: asset.preview_url,
+      open_url: asset.open_url,
+      download_url: asset.download_url,
+      content_type: asset.content_type,
+      attachment: nil
+    )
+  end
+
+  def attachment_resource(attachment)
+    DocumentResource.new(
+      preview_url: nil,
+      open_url: nil,
+      download_url: nil,
+      content_type: attachment.content_type,
+      attachment:
+    )
+  end
+
+  def file_kind(url)
+    url.downcase.match?(/\.(png|jpe?g|gif|webp)(\?|$)/) ? :image : :file
+  end
 end

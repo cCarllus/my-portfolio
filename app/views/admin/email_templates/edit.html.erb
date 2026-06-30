@@ -7,13 +7,14 @@
 
 <%= form_with model: @profile, url: admin_email_template_path, class: "admin-form" do |form| %>
   <%= render "admin/shared/errors", record: @profile %>
-  <label class="admin-field">
-    <span><%= t("admin.fields.resume") %></span>
-    <%= form.file_field :resume, accept: "application/pdf" %>
-  </label>
-  <% if @profile.resume.attached? %>
-    <p class="admin-card__meta"><%= @profile.resume.filename %></p>
-  <% end %>
+  <%= render "admin/shared/remote_file_fields",
+    form:,
+    file_field: :resume,
+    url_field: :resume_url,
+    file_label: t("admin.fields.resume"),
+    url_label: t("admin.fields.resume_url"),
+    file_accept: "application/pdf",
+    current_filename: (@profile.resume.attached? ? @profile.resume.filename : nil) %>
 
   <%= render "admin/shared/translated_fields", form:, attribute: :email_subjects, title: t("admin.fields.email_subjects") %>
   <%= render "admin/shared/translated_fields", form:, attribute: :email_bodies, title: t("admin.fields.email_bodies"), textarea: true, rows: 16 %>

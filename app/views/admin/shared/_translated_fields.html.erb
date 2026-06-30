@@ -26,10 +26,17 @@
   <% if local_assigns.fetch(:textarea, false) %>
     <div class="markdown-editor">
       <div class="markdown-editor__toolbar" role="toolbar" aria-label="<%= t("admin.editor.toolbar") %>">
+        <button type="button" data-action="localized-field#format" data-format="heading1" aria-label="<%= t("admin.editor.heading1") %>">H1</button>
+        <button type="button" data-action="localized-field#format" data-format="heading2" aria-label="<%= t("admin.editor.heading2") %>">H2</button>
+        <button type="button" data-action="localized-field#format" data-format="heading3" aria-label="<%= t("admin.editor.heading3") %>">H3</button>
         <button type="button" data-action="localized-field#format" data-format="bold" aria-label="<%= t("admin.editor.bold") %>"><strong>B</strong></button>
         <button type="button" data-action="localized-field#format" data-format="italic" aria-label="<%= t("admin.editor.italic") %>"><em>I</em></button>
-        <button type="button" data-action="localized-field#format" data-format="heading" aria-label="<%= t("admin.editor.heading") %>">H2</button>
         <button type="button" data-action="localized-field#format" data-format="list" aria-label="<%= t("admin.editor.list") %>">• list</button>
+        <button type="button" data-action="localized-field#format" data-format="orderedList" aria-label="<%= t("admin.editor.ordered_list") %>">1. list</button>
+        <button type="button" data-action="localized-field#format" data-format="link" aria-label="<%= t("admin.editor.link") %>">link</button>
+        <button type="button" data-action="localized-field#format" data-format="code" aria-label="<%= t("admin.editor.code") %>">&lt;/&gt;</button>
+        <button type="button" data-action="localized-field#format" data-format="quote" aria-label="<%= t("admin.editor.quote") %>">“</button>
+        <button type="button" data-action="localized-field#format" data-format="strikethrough" aria-label="<%= t("admin.editor.strikethrough") %>">S̶</button>
         <button type="button" data-action="localized-field#togglePreview"><%= t("admin.editor.preview") %></button>
       </div>
       <textarea rows="<%= local_assigns.fetch(:rows, 8) %>"

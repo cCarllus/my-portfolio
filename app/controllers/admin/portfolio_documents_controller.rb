@@ -12,6 +12,7 @@ module Admin
         :published,
         :uses_resume,
         :file,
+        :file_url,
         titles: I18n.available_locales,
         bodies: I18n.available_locales
       )

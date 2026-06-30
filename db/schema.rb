@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_30_142000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_30_152001) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.integer "blob_id", null: false
     t.datetime "created_at", null: false
@@ -85,14 +85,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_30_142000) do
   end
 
   create_table "highlights", force: :cascade do |t|
+    t.string "category", default: "highlight", null: false
+    t.string "category_color"
     t.datetime "created_at", null: false
     t.json "descriptions", default: {}, null: false
+    t.string "external_url"
+    t.integer "github_repository_id"
+    t.datetime "github_synced_at"
     t.string "metric"
     t.integer "portfolio_profile_id", null: false
     t.integer "position", default: 0, null: false
+    t.string "primary_language"
     t.boolean "published", default: true, null: false
+    t.string "source", default: "manual", null: false
     t.json "titles", default: {}, null: false
     t.datetime "updated_at", null: false
+    t.index ["portfolio_profile_id", "github_repository_id"], name: "index_highlights_on_profile_and_github_repository", unique: true
     t.index ["portfolio_profile_id", "position"], name: "index_highlights_on_portfolio_profile_id_and_position"
     t.index ["portfolio_profile_id"], name: "index_highlights_on_portfolio_profile_id"
   end
@@ -101,6 +109,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_30_142000) do
     t.json "bodies", default: {}, null: false
     t.string "content_kind", default: "custom", null: false
     t.datetime "created_at", null: false
+    t.string "file_url"
     t.integer "portfolio_profile_id", null: false
     t.integer "position", default: 0, null: false
     t.boolean "published", default: true, null: false
@@ -113,6 +122,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_30_142000) do
   end
 
   create_table "portfolio_profiles", force: :cascade do |t|
+    t.string "avatar_url"
     t.string "contact_email"
     t.datetime "created_at", null: false
     t.json "email_bodies", default: {}, null: false
@@ -127,6 +137,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_30_142000) do
     t.string "nickname"
     t.json "philosophies", default: {}, null: false
     t.string "phone"
+    t.string "resume_url"
     t.json "roles", default: {}, null: false
     t.json "summaries", default: {}, null: false
     t.datetime "updated_at", null: false

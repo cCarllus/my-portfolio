@@ -1,17 +1,62 @@
-<div class="highlights-file">
-  <header class="file-showcase__intro">
-    <span><%= t("home.index.documents.generated.live_data") %></span>
-    <p><%= t("home.index.documents.generated.highlights_intro") %></p>
+<div class="projects-catalog" data-controller="project-catalog">
+  <header class="file-showcase__intro projects-catalog__intro">
+    <div>
+      <span><%= t("home.index.documents.generated.live_data") %></span>
+      <p><%= t("home.index.projects.intro") %></p>
+    </div>
+    <strong data-project-catalog-target="count" data-template="<%= t("home.index.projects.count_template") %>"><%= t("home.index.projects.count", count: portfolio.highlights.size) %></strong>
   </header>
 
-  <div class="highlights-file__grid">
-    <% portfolio.highlights.each_with_index do |highlight, index| %>
-      <article>
-        <span class="highlights-file__index"><%= format("%02d", index + 1) %></span>
-        <strong><%= highlight.metric %></strong>
-        <h3><%= highlight.localized(:titles) %></h3>
-        <div><%= render_markdown(highlight.localized(:descriptions)) %></div>
+  <div class="projects-catalog__search">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+    <input
+      type="search"
+      placeholder="<%= t("home.index.projects.search") %>"
+      aria-label="<%= t("home.index.projects.search") %>"
+      data-project-catalog-target="search"
+      data-action="input->project-catalog#filter">
+  </div>
+
+  <div class="projects-catalog__filters" role="group" aria-label="<%= t("home.index.projects.filter_label") %>">
+    <button type="button" class="is-active" data-project-catalog-target="filter" data-category="all" data-action="project-catalog#selectCategory">
+      <i style="--project-color: #60a5fa"></i><%= t("home.index.projects.all") %>
+    </button>
+    <% Highlight::CATEGORIES.each do |category| %>
+      <% sample = portfolio.highlights.find { |project| project.category == category } %>
+      <button type="button" data-project-catalog-target="filter" data-category="<%= category %>" data-action="project-catalog#selectCategory">
+        <i style="--project-color: <%= sample&.category_color || "#71717a" %>"></i>
+        <%= t("admin.highlights.categories.#{category}") %>
+      </button>
+    <% end %>
+  </div>
+
+  <div class="projects-catalog__grid">
+    <% portfolio.highlights.each do |project| %>
+      <article
+        class="project-card"
+        data-project-catalog-target="item"
+        data-category="<%= project.category %>"
+        data-search-text="<%= [ project.localized(:titles), project.localized(:descriptions), project.primary_language ].compact.join(" ") %>">
+        <header>
+          <span class="project-card__category" style="--project-color: <%= project.category_color %>">
+            <i></i><%= t("admin.highlights.categories.#{project.category}") %>
+          </span>
+          <small><%= t("admin.highlights.sources.#{project.source}") %></small>
+        </header>
+        <h3><%= project.localized(:titles) %></h3>
+        <div class="project-card__description"><%= render_markdown(project.localized(:descriptions)) %></div>
+        <footer>
+          <span><%= project.metric.presence || project.primary_language.presence || t("home.index.projects.portfolio") %></span>
+          <% if project.external_url.present? %>
+            <%= link_to project.external_url, target: "_blank", rel: "noopener", aria: { label: t("home.index.projects.open", name: project.localized(:titles)) } do %>
+              <%= t("home.index.projects.view") %>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            <% end %>
+          <% end %>
+        </footer>
       </article>
     <% end %>
   </div>
+
+  <p class="projects-catalog__empty" data-project-catalog-target="empty" hidden><%= t("home.index.projects.empty") %></p>
 </div>

@@ -38,7 +38,7 @@ en:
         label: "Career highlights"
         tabs:
           work: "Work experience"
-          projects: "Highlights"
+          projects: "Projects / Highlights"
           education: "Education"
         work:
           - name: "Monde Sistemas"
@@ -145,6 +145,19 @@ en:
           open: "Open in new tab"
           download: "Download PDF"
           iframe_title: "Carlos Henrique Caldeira's resume"
+      projects:
+        intro: "Public projects, relevant work and synchronized repositories in one catalog."
+        search: "Search by name or description"
+        filter_label: "Filter projects by category"
+        all: "All"
+        count:
+          one: "1 project"
+          other: "%{count} projects"
+        count_template: "%{count} projects"
+        portfolio: "Portfolio"
+        view: "View project"
+        open: "Open %{name}"
+        empty: "No projects match the current search and filters."
       footer:
         label: "Professional links"
         links:

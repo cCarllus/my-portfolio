@@ -15,10 +15,14 @@
         <%= form.text_field attribute %>
       </label>
     <% end %>
-    <label class="admin-field">
-      <span><%= t("admin.fields.avatar") %></span>
-      <%= form.file_field :avatar, accept: "image/*" %>
-    </label>
+    <%= render "admin/shared/remote_file_fields",
+      form:,
+      file_field: :avatar,
+      url_field: :avatar_url,
+      file_label: t("admin.fields.avatar"),
+      url_label: t("admin.fields.avatar_url"),
+      file_accept: "image/*",
+      current_filename: (@profile.avatar.attached? ? @profile.avatar.filename : nil) %>
   </div>
 
   <%= render "admin/shared/translated_fields", form:, attribute: :roles, title: t("admin.fields.roles") %>

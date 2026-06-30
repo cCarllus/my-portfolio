@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "indexedAt": 1782840227734,
+  "indexedAt": 1782845971914,
   "controllers": {
     "hello": {
       "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/hello_controller.js",
@@ -183,23 +183,23 @@
         },
         {
           "name": "togglePreview",
-          "line": 39
+          "line": 46
         },
         {
           "name": "loadLocale",
-          "line": 47
+          "line": 54
         },
         {
           "name": "renderPreview",
-          "line": 55
+          "line": 62
         },
         {
           "name": "escapeHtml",
-          "line": 79
+          "line": 93
         }
       ],
       "classes": [],
-      "mtime": 1782836864050.5415
+      "mtime": 1782845971485.8047
     },
     "sortable": {
       "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/sortable_controller.js",
@@ -254,6 +254,34 @@
       ],
       "classes": [],
       "mtime": 1782838817765.9592
+    },
+    "project-catalog": {
+      "filePath": "/Applications/Develop/Projetos/my_portfolio/app/javascript/controllers/project_catalog_controller.js",
+      "targets": [
+        "search",
+        "filter",
+        "item",
+        "count",
+        "empty"
+      ],
+      "values": [],
+      "outlets": [],
+      "actions": [
+        {
+          "name": "selectCategory",
+          "line": 11
+        },
+        {
+          "name": "filter",
+          "line": 19
+        },
+        {
+          "name": "normalize",
+          "line": 36
+        }
+      ],
+      "classes": [],
+      "mtime": 1782845918063.0972
     }
   }
 }

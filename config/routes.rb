@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     end
     resources :highlights do
       patch :reorder, on: :collection
+      post :sync_github, on: :collection
     end
     resources :educations do
       patch :reorder, on: :collection

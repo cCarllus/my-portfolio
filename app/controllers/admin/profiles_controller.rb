@@ -28,6 +28,7 @@ module Admin
         :linkedin_url,
         :github_url,
         :avatar,
+        :avatar_url,
         roles: I18n.available_locales,
         locations: I18n.available_locales,
         philosophies: I18n.available_locales

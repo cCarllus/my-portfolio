@@ -1,7 +1,14 @@
 <%= form_with model: [ :admin, record ], class: "admin-form" do |form| %>
   <%= render "admin/shared/errors", record: %>
   <div class="admin-form__grid">
-    <label class="admin-field"><span><%= t("admin.fields.file") %></span><%= form.file_field :file %></label>
+    <%= render "admin/shared/remote_file_fields",
+      form:,
+      file_field: :file,
+      url_field: :file_url,
+      file_label: t("admin.fields.file"),
+      url_label: t("admin.fields.file_url"),
+      file_accept: nil,
+      current_filename: (record.file.attached? ? record.file.filename : nil) %>
     <label class="admin-check"><%= form.check_box :published %><%= t("admin.fields.published") %></label>
     <label class="admin-check"><%= form.check_box :uses_resume %><%= t("admin.fields.uses_resume") %></label>
   </div>

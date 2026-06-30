@@ -14,7 +14,13 @@
           <% if document.derived? %>
             <%= t("admin.documents.synchronized") %>
           <% else %>
-            <%= document.file.attached? ? document.file.filename : t("admin.documents.no_file") %>
+            <% if document.file_url.present? %>
+              <%= document.file_url %>
+            <% elsif document.file.attached? %>
+              <%= document.file.filename %>
+            <% else %>
+              <%= t("admin.documents.no_file") %>
+            <% end %>
           <% end %>
         </span>
       </div>

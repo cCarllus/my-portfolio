@@ -1,4 +1,5 @@
 require "erb"
+require "uri"
 
 module Portfolio
   class MarkdownRenderer
@@ -20,7 +21,13 @@ module Portfolio
       while index < lines.length
         line = lines[index]
 
-        if line.blank?
+        if (fence = line.match(/\A```([A-Za-z0-9_+-]*)\s*\z/))
+          flush_paragraph(blocks, paragraph)
+          code, index = collect_code_block(index + 1)
+          language = fence[1].presence
+          class_name = language ? %( class="language-#{ERB::Util.html_escape(language)}") : ""
+          blocks << "<pre><code#{class_name}>#{ERB::Util.html_escape(code.join("\n"))}</code></pre>"
+        elsif line.blank?
           flush_paragraph(blocks, paragraph)
         elsif (heading = line.match(/\A([#]{1,3})\s+(.+)\z/))
           flush_paragraph(blocks, paragraph)
@@ -63,6 +70,15 @@ module Portfolio
       [ items, index - 1 ]
     end
 
+    def collect_code_block(index)
+      code = []
+      while index < lines.length && !lines[index].match?(/\A```\s*\z/)
+        code << lines[index]
+        index += 1
+      end
+      [ code, index ]
+    end
+
     def flush_paragraph(blocks, paragraph)
       return if paragraph.empty?
 
@@ -73,8 +89,21 @@ module Portfolio
     def inline(value)
       ERB::Util.html_escape(value)
         .gsub(/`([^`]+)`/, '<code>\1</code>')
+        .gsub(/\[([^\]]+)\]\(([^)\s]+)\)/) { safe_link(Regexp.last_match(1), Regexp.last_match(2)) }
         .gsub(/\*\*([^*]+)\*\*/, '<strong>\1</strong>')
         .gsub(/\*([^*]+)\*/, '<em>\1</em>')
+        .gsub(/~~([^~]+)~~/, '<del>\1</del>')
+    end
+
+    def safe_link(label, url)
+      uri = URI.parse(url)
+      return label unless uri.scheme.in?(%w[http https mailto])
+
+      attributes = %(href="#{ERB::Util.html_escape(url)}")
+      attributes += ' target="_blank" rel="noopener"' if uri.scheme.in?(%w[http https])
+      "<a #{attributes}>#{label}</a>"
+    rescue URI::InvalidURIError
+      label
     end
   end
 end

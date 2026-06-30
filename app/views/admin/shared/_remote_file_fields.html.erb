@@ -1,0 +1,13 @@
+<div class="admin-field-pair">
+  <label class="admin-field">
+    <span><%= file_label %></span>
+    <%= form.file_field file_field, accept: file_accept %>
+    <% if current_filename.present? %>
+      <small class="admin-field__meta"><%= current_filename %></small>
+    <% end %>
+  </label>
+  <label class="admin-field">
+    <span><%= url_label %></span>
+    <%= form.url_field url_field, placeholder: "https://" %>
+  </label>
+</div>

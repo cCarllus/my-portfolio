@@ -1,5 +1,6 @@
 class PortfolioProfile < ApplicationRecord
   include LocalizedFields
+  include RemoteFileUrl
 
   has_many :skills, dependent: :destroy
   has_many :experiences, dependent: :destroy
@@ -13,6 +14,7 @@ class PortfolioProfile < ApplicationRecord
   validates :full_name, presence: true
   validates :contact_email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
   validates :map_x_percent, :map_y_percent, numericality: { in: 0..100 }
+  validates_remote_file_url :avatar_url, :resume_url
   validate :resume_is_pdf
 
   def self.current
