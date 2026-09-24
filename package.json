@@ -1,0 +1,14 @@
+{
+  "name": "my-portfolio-github-pages",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static HTML, CSS and JavaScript edition of the Rails portfolio",
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "check": "node scripts/build.cjs --check",
+    "test": "node --test tests/*.test.cjs",
+    "start": "node scripts/serve.cjs",
+    "package": "node scripts/package.cjs"
+  },
+  "engines": { "node": ">=20" }
+}

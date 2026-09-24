@@ -1,9 +1,0 @@
-<header class="admin-page-header">
-  <div><h1><%= @contact_request.email %></h1><p><%= t("admin.requests.detail") %></p></div>
-  <%= link_to t("admin.actions.back"), admin_contact_requests_path, class: "admin-button admin-button--secondary" %>
-</header>
-<article class="admin-card">
-  <% %i[contact_name company_name job_title locale status request_ip user_agent sent_at error_message].each do |attribute| %>
-    <p><strong><%= t("admin.fields.#{attribute}") %>:</strong> <%= @contact_request.public_send(attribute).presence || "—" %></p>
-  <% end %>
-</article>
