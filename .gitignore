@@ -1,0 +1,16 @@
+# Local configuration must never be added to the public repository.
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Generated output, test fixtures and development dependencies.
+/_site/
+/.package-test-*/
+/node_modules/
+/coverage/
+/.ruby-lsp/
+npm-debug.log*
+
+# Operating system metadata.
+.DS_Store

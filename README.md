@@ -6,10 +6,9 @@ O `index.html` já está gerado e contém os textos e documentos. Pode ser abert
 
 ## Abrir e testar
 
-Abra `index.html` nesta pasta. Para uma prévia por HTTP, com Node 20 ou superior:
+Abra `index.html` na raiz deste repositório. Para uma prévia por HTTP, com Node 20 ou superior, execute nessa mesma raiz:
 
 ```sh
-cd my_portfolio_github_pages
 npm start
 ```
 
@@ -27,34 +26,33 @@ Acesse `http://127.0.0.1:4174/meu-portfolio/`. Todos os caminhos de CSS, JavaScr
 
 Use um repositório público para o fluxo gratuito do GitHub Free. A publicação ainda não foi realizada por esta conversão.
 
-### Opção A: repositório exclusivo para esta versão
+### Estrutura atual: site na raiz do repositório
 
-1. Crie um repositório público no GitHub.
-2. Coloque **o conteúdo desta pasta na raiz** desse repositório, incluindo os arquivos ocultos `.github`, `.gitignore` e `.nojekyll`. O `index.html` deve ficar na raiz, não dentro de outra pasta `my_portfolio_github_pages`.
-3. Envie os arquivos para a branch `main`.
+O site agora está diretamente na raiz: `index.html`, `assets/`, `scripts/` e `package.json` ficam ao lado de `.github/`. O workflow está em `.github/workflows/pages.yml`, no local reconhecido pelo GitHub. Ele não depende da antiga pasta `my_portfolio_github_pages` nem da aplicação Rails.
+
+1. Use um repositório público no GitHub para a opção gratuita.
+2. Antes de enviar arquivos, confira a seção de segurança abaixo e não versione configurações privadas.
+3. Inclua `.github/`, `.gitignore` e `.nojekyll` no commit, junto das fontes do site, e envie para a branch `main`.
 4. Em **Settings → Pages → Build and deployment → Source**, selecione **GitHub Actions**.
 5. Em **Actions → Deploy static portfolio to GitHub Pages**, execute **Run workflow** na branch `main`. Os próximos pushes nessa branch executarão o mesmo fluxo automaticamente.
 
-O workflow valida o HTML, executa os testes e publica somente `index.html`, `.nojekyll` e `assets/`. Não há instalação de dependências. O endereço publicado aparece na execução do workflow e em Settings → Pages.
+O workflow valida o HTML, executa os testes e recria `_site/` usando `npm run package -- --clean`. Somente `index.html`, `.nojekyll` e `assets/` são publicados. Não há instalação de dependências; o Node 24 é utilizado apenas no runner. O endereço publicado aparece na execução do workflow e em Settings → Pages.
 
-### Opção B: manter esta pasta no repositório Rails existente
+Pull requests para `main` executam a validação e o empacotamento, mas **não publicam o site**. Execuções manuais em outras branches também não publicam. As permissões de publicação ficam restritas ao job de deploy, que só roda após o sucesso do build.
 
-Os arquivos Rails podem continuar onde estão. O GitHub só reconhece workflows dentro de `.github/workflows/` **na raiz do repositório**.
+`.github/dependabot.yml` configura a revisão mensal das versões das GitHub Actions. Os antigos workflows Rails/Fly não fazem parte desta versão estática.
 
-Copie, sem substituir outros workflows:
+Se a branch principal não se chama `main`, ajuste `on.push.branches`, `on.pull_request.branches` e as condições do upload e de `jobs.deploy.if` no workflow.
 
-```text
-my_portfolio_github_pages/.github/workflows/pages.yml
-    → .github/workflows/pages.yml
-```
+Ao copiar o projeto, inclua também os arquivos que começam com ponto. Os testes verificam a presença dos arquivos de publicação para detectar uma cópia incompleta.
 
-Essa cópia não foi feita automaticamente: todas as alterações desta tarefa ficaram dentro da pasta solicitada. Depois de copiar o workflow, selecione **GitHub Actions** em Settings → Pages e execute-o na branch `main`. Ele detecta `my_portfolio_github_pages` e publica apenas o conteúdo público dessa pasta.
+### Segurança antes do push
 
-Os workflows anteriores do Rails, incluindo deploy para o servidor antigo, não foram alterados. Eles continuam seguindo seus próprios gatilhos de execução; revise-os separadamente antes de enviar mudanças ao repositório antigo.
+Na conferência desta estrutura, `.env` já estava rastreado pelo Git. Seu conteúdo não foi lido nem modificado nesta correção. O `.gitignore` restaurado impede novas inclusões acidentais, mas **não remove arquivos já versionados nem apaga o histórico**.
 
-**Não selecione esta pasta na opção “Deploy from a branch”.** Essa modalidade oferece somente `/` ou `/docs` como pasta de origem. Para manter o nome `my_portfolio_github_pages`, use o workflow acima.
+Revise esse arquivo localmente antes do próximo push. Para deixar de rastreá-lo, mantendo a cópia local, execute `git rm --cached -- .env` e inclua essa remoção no commit. Se houver credenciais reais já publicadas, revogue ou troque essas credenciais e revise a remoção do histórico. O site estático não precisa de `.env`.
 
-Se a branch principal não se chama `main`, ajuste tanto `on.push.branches` quanto a condição `jobs.deploy.if` no workflow.
+O workflow publica somente `_site/`, não a raiz do repositório. Isso não substitui a proteção do próprio repositório contra credenciais versionadas.
 
 ### Alternativa sem workflow próprio
 
@@ -132,6 +130,8 @@ O build atualiza a versão pré-renderizada do `index.html`; isso mantém os tex
 index.html                          HTML completo já gerado
 .nojekyll                           Desativa Jekyll na publicação por branch
 .github/workflows/pages.yml         Workflow de validação e publicação
+.github/dependabot.yml              Atualizações mensais das GitHub Actions
+.gitignore                          Exclusão de configurações e arquivos locais
 assets/css/application.css          CSS original do portfólio
 assets/css/static.css               Ajustes da versão estática e acessibilidade
 assets/js/content.js                Conteúdo público e traduções editáveis
@@ -152,11 +152,15 @@ O CSS original importa Inter e JetBrains Mono do Google Fonts. Esse é o único 
 npm run package
 ```
 
-A pasta `_site/` conterá apenas os arquivos para hospedagem. Ela é gerada e ignorada pelo Git. Para recriá-la quando já existir, use `npm run package -- --clean`, que substitui somente `_site/`. Não é necessário empacotar para abrir `index.html` localmente.
+A pasta `_site/` conterá apenas os arquivos para hospedagem. Para recriá-la quando já existir, use `npm run package -- --clean`, que substitui somente `_site/`. O workflow usa essa opção para não falhar caso já exista uma cópia gerada no checkout. Não é necessário empacotar para abrir `index.html` localmente.
+
+O `.gitignore` inclui `_site/`, mas há arquivos dessa pasta já rastreados nesta estrutura. Para deixar de versionar a saída gerada sem apagá-la localmente, use `git rm -r --cached -- _site` e inclua essa alteração no commit. O workflow recria a pasta a partir das fontes.
 
 ## Validação
 
 `npm test` verifica conteúdo, paridade de traduções, renderização, escape de HTML, URLs seguras, filtros, IDs, âncoras, presença de todos os recursos, integridade básica do PDF e acesso HTTP na raiz e em `/example-repository/`. Os testes HTTP também verificam tipos de conteúdo, recursos inexistentes, proteção dos arquivos internos e redirecionamento de subpastas.
+
+Os testes de publicação verificam os arquivos ocultos obrigatórios, o empacotamento sem arquivos privados e a recriação segura de uma saída já existente. Os arquivos privados usados nesses testes são sintéticos; o `.env` local não é aberto.
 
 A validação visual em um navegador real não foi concluída nesta sessão: a ponte de navegador retornou erro de carregamento e o comando alternativo de navegador não estava permitido no ambiente. Os testes automatizados não substituem a revisão visual. Antes de publicar, confira as duas cores, os dois idiomas, as seis visualizações de documentos e o layout em celular.
 
